@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+    script.
+      var uuid = '#{uuid}';
+      var ready = false;
+    script(type="text/javascript", src="js/jquery-2.1.0.min.js")
+    script(type="text/javascript", src="js/msg.js")
+    script(type="text/javascript", src="/socket.io/socket.io.js")
+    script(type="text/javascript", src="js/socket.js")
+  body
+    div.header
+      | HONEYPOT TEST CASE
+      span.header-sub 将各个CASE地址拷贝到播放器测试并等待测试完成
+    div.legend
+      div.legend-title 示例说明：
+      div.legend-item.result-wait 等待
+      div.legend-item.result-success 成功
+      div.legend-item.result-warn 警告
+      div.legend-item.result-fail 失败
+      div.legend-item.result-terminate 终止
+    div.item-result-list
+      div#wait-ready.result-item.result-wait 请等待，系统还未准备好
+    div#case-list
+      -each item in cases
+        div.case-item
+          div.item-header
+            div.item-header-title=item.name
+            div.item-header-info #{host}/case/#{item.id}/index?uuid=#{uuid}
+          div.item-result-list(id=item.id)
