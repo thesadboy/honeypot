@@ -1,0 +1,19 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "node-uuid": "^1.4.1",
+    "socket.io": "^0.9.16",
+    "throttle": "^1.0.3",
+    "mime": "^1.2.11",
+    "log4js": "^0.6.12",
+    "memory-cache": "0.0.5",
+    "line-reader": "^0.2.3"
+  }
+}
