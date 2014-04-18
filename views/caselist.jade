@@ -15,6 +15,8 @@ html
     div.header
       | HONEYPOT TEST CASE
       span.header-sub 将各个CASE地址拷贝到播放器测试并等待测试完成
+    div.restart
+      a(href="/") 重新生成用例
     div.legend
       div.legend-title 示例说明：
       div.legend-item.result-wait 等待
@@ -29,5 +31,5 @@ html
         div.case-item
           div.item-header
             div.item-header-title=item.name
-            div.item-header-info #{host}/case/#{item.id}/index?uuid=#{uuid}
+            div.item-header-info #{protocol}://#{host}/case/#{item.id}/index?uuid=#{uuid}
           div.item-result-list(id=item.id)

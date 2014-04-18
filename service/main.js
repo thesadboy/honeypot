@@ -15,6 +15,7 @@ exports.caseList = function (req, res) {
   res.render('caselist', {
     cases: strategy.getCases(),
     host: req.headers.host,
+    protocol : req.protocol,
     uuid: req.cookies['uuid']
   });
 };

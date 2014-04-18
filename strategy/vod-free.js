@@ -7,7 +7,7 @@ var caseInfo = module.exports = {
   index: 'index.m3u8',
   type: 'vod',
   segment: 10,
-  id: 'vod-free-free'
+  id: 'vod-free'
 };
 
 var strategyVod = new Strategy(caseInfo.id);

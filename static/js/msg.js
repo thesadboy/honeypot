@@ -3,7 +3,7 @@ $(function () {
   initSocket(url);
 });
 var readyTest = function () {
-  $('#wait-ready').removeClass('result-wait').addClass('result-success').html('系统已经准备好，可以开始测试，请在30分钟内完成测试并不要刷新页面');
+  $('#wait-ready').removeClass('result-wait').addClass('result-success').html('系统已经准备好，可以开始测试，请在30分钟内完成测试并不要刷新页面，若无法进行则点击重新生成用例再次测试。');
 };
 
 var waitMsg = function (data) {
