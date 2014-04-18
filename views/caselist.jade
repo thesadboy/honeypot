@@ -11,6 +11,7 @@ html
     script(type="text/javascript", src="/socket.io/socket.io.js")
     script(type="text/javascript", src="js/socket.js")
   body
+    input#host(type="hidden",value=host)
     div.header
       | HONEYPOT TEST CASE
       span.header-sub 将各个CASE地址拷贝到播放器测试并等待测试完成

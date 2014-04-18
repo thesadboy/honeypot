@@ -33,7 +33,7 @@ var Strategy = exports.Strategy = function (id) {
   this.id = id;
   sendHandles[id] = [];
   resultHandles[id] = [];
-}
+};
 
 Strategy.prototype = {
   constructor: Strategy,

@@ -11,7 +11,7 @@ var caseInfo = module.exports = {
 };
 var strategyLive = new Strategy(caseInfo.id);
 //注册测试点
-strategyLive.registSendHandle(/index/, function (uri, handle) {
+strategyLive.registSendHandle(/index\.m3u8/, function (uri, handle) {
   handle.send('live-free-bandwidth-pre', { //播放器多码率预读
     msg: '播放器是否预读多码率信息'
   }).cookie('cookietest', 'cookiesupport').send('live-free-cookie', { //播放器cookie支持

@@ -10,9 +10,9 @@ exports.getM3U8 = function (caseInfo, path, req, res, next) {
   } else {
     getMediaM3U8(caseInfo, path, req, res, next);
   }
-}
+};
 
-var getMusterM3U8 = function (path, req, res, next) {
+var getMusterM3U8 = function (path, req, res) {
   var id = req.params.id;
   var uuid = req.query.uuid;
   if (!clients.get(uuid) || !clients.get(uuid)[id]) {
@@ -25,7 +25,7 @@ var getMusterM3U8 = function (path, req, res, next) {
   res.send(m3u8);
 };
 
-var getMediaM3U8 = function (caseInfo, path, req, res, next) {
+var getMediaM3U8 = function (caseInfo, path, req, res) {
   var id = req.params.id;
   var uuid = req.query.uuid;
   var live = clients.get(uuid)[id];

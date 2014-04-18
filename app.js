@@ -4,12 +4,19 @@
 
 var express = require('express');
 var http = require('http');
+var https = require('https');
 var path = require('path');
 var routes = require('./routes');
 var sendHandle = require('./utils/send_handle');
 var logger = require('./utils/logger');
 var socket = require('./utils/socket');
+var fs = require('fs');
 var app = express();
+var ssl = {
+  key: '',
+  cert: '',
+  ca: ''
+};
 
 // all environments
 app.set('port', process.env.PORT || 2000);

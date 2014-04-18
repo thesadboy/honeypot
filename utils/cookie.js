@@ -1,5 +1,3 @@
-var socket = require('./socket');
-
 exports.parse = function (str) {
   if (!str) return {};
   var obj = {};

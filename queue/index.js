@@ -1,13 +1,11 @@
 var clients = require('memory-cache');
-var Timer = require('timers');
-var SLICE = Array.prototype.slice;
 var resultHandle = require('../utils/result_handle');
 
 exports.addCases = function (uuid, ids) {
   ids.forEach(function (id) {
     addCase(uuid, id);
   });
-}
+};
 
 var addCase = exports.addCase = function (uuid, id) {
   var client = clients.get(uuid) || {};

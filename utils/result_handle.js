@@ -2,25 +2,24 @@ var socket = require('./socket');
 var timers = require('timers');
 var resultHandles = {};
 
-exports.registHandle = function (id, condition, callback) {
+exports.registHandle = function(id, condition, callback) {
   resultHandles[id] = resultHandles[id] || [];
   resultHandles[id].push([condition, callback]);
 };
 
-exports.handleResult = function (uuid, id, queue) {
+exports.handleResult = function(uuid, id, queue) {
   var handles = resultHandles[id];
   if (queue.needStop) return;
   var list = queue.list;
   var latest = list[list.length - 1];
   var valid = [];
-  list.forEach(function (item) {
+  list.forEach(function(item) {
     if (!item.finished) {
       valid.push(item);
     }
   });
   var req = latest.req;
-  var res = latest.res;
-  handles.forEach(function (handle) {
+  handles.forEach(function(handle) {
     var condition = handle[0];
     var cb = handle[1];
     if (condition.type == 'URI') {
@@ -29,12 +28,11 @@ exports.handleResult = function (uuid, id, queue) {
         cb(valid, new Handle(uuid, id, queue));
         queue.setFinish();
       }
-    } else {
     }
   });
 };
 
-var Handle = function (uuid, id, queue) {
+var Handle = function(uuid, id, queue) {
   this.uuid = uuid;
   this.id = id;
   this.queue = queue;
@@ -47,7 +45,7 @@ Handle.prototype = {
    * @param data
    * @returns {Handle}
    */
-  send: function (type, data) {
+  send: function(type, data) {
     data.parent = '#' + this.id;
     data.id = '#' + type;
     socket.send(this.uuid, 'result', data);
@@ -57,7 +55,7 @@ Handle.prototype = {
    * 停止监听
    * @param type
    */
-  stop: function (type) {
+  stop: function(type) {
     this.queue.stop();
     if (type) {
       var data = {
@@ -77,9 +75,9 @@ Handle.prototype = {
    * @param cb
    * @returns {Handle}
    */
-  timeout: function (ms, cb) {
+  timeout: function(ms, cb) {
     var that = this;
-    timers.setTimeout(function () {
+    timers.setTimeout(function() {
       cb(that.queue);
     }, ms);
     return this;

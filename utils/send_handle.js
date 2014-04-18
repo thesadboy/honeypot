@@ -1,6 +1,4 @@
 var Throttle = require('throttle');
-var Mime = require('mime');
-var Path = require('path');
 var Fs = require('fs');
 var Timers = require('timers');
 var Strategy = require('../strategy');
@@ -9,7 +7,6 @@ var socket = require('./socket');
 var logger = require('./logger').logger('case');
 var ResultHandle = require('./result_handle').ResultHandle;
 var clients = require('memory-cache');
-var cloneObject = require('./util').cloneObject;
 
 //初始化Handle
 exports.initHandle = function () {
@@ -43,7 +40,7 @@ exports.initHandle = function () {
           });
         }
       }, self.sdelay || 0);
-    }
+    };
     next();
   }
 };

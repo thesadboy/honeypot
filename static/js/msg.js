@@ -1,11 +1,7 @@
 $(function () {
-  waitReady();
+  var url = 'http://' + $('#host').val();
+  initSocket(url);
 });
-
-var waitReady = function () {
-  if (ready) return readyTest();
-  setTimeout(waitReady, 1000);
-};
 var readyTest = function () {
   $('#wait-ready').removeClass('result-wait').addClass('result-success').html('系统已经准备好，可以开始测试，请在30分钟内完成测试并不要刷新页面');
 };
@@ -32,4 +28,4 @@ var endMsg = function (data) {
     html = $('<div class="result-item result-' + data.result + '">' + data.msg + '</div>').attr('id', data.parent.replace('#', '') + '-end');
     $(data.parent).append(html);
   }
-}
+};

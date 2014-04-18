@@ -29,13 +29,13 @@ exports.getFilePath = function (type, req) {
     path = Path.join(__dirname, '..', 'resource', id, Url.parse(uripath).pathname);
   }
   return path;
-}
+};
 
 var getNameByUrl = exports.getNameByUrl = function (url) {
   if (!url) return '';
   var pathnames = Url.parse(url).pathname.split('/');
   return pathnames[pathnames.length - 1];
-}
+};
 
 exports.replaceM3U8Url = function (str, id, uuid) {
   var keyPos = -1;

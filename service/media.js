@@ -1,6 +1,5 @@
 var UriUtil = require('../utils/uri');
 var Fs = require('fs');
-var Path = require('path');
 var Strategy = require('../strategy');
 var Live = require('./media_live');
 var clients = require('memory-cache');
@@ -43,7 +42,7 @@ exports.route = function (req, res, next) {
     return getKey(path, req, res, next);
   res.sendfile(path);
 };
-var getM3U8 = function (path, req, res, next) {
+var getM3U8 = function (path, req, res) {
   var id = req.params.id;
   var uuid = req.query.uuid;
   var m3u8 = Fs.readFileSync(path).toString();
@@ -52,11 +51,11 @@ var getM3U8 = function (path, req, res, next) {
   res.setHeader('Content-Length', new Buffer(m3u8).length);
   res.send(m3u8);
 };
-var getKey = function (path, req, res, next) {
+var getKey = function (path, req, res) {
   res.setHeader('Content-Type', 'text/plain');
   res.sendfile(path);
 };
-var getTS = function (path, req, res, next) {
+var getTS = function (path, req, res) {
   var id = req.params.id;
   var uuid = req.query.uuid;
   var live = clients.get(uuid)[id];

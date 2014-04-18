@@ -1,5 +1,4 @@
 var Mime = require('mime');
-var logger = require('./logger').logger('case');
 
 exports.defaultHeaders = function (res, stat) {
   if (!res.getHeader('Accept-Ranges')) res.setHeader('Accept-Ranges', 'bytes');
@@ -9,7 +8,7 @@ exports.defaultHeaders = function (res, stat) {
   if (!res.getHeader('Last-Modified')) res.setHeader('Last-Modified', stat.mtime.toUTCString());
 };
 exports.setContentLength = function (res, stat) {
-  if (res.setHeader('Content-Length', stat.size));
+  if (!res.getHeader('Content-Length'))res.setHeader('Content-Length', stat.size);
 };
 exports.setContentType = function (res, path) {
   if (res.getHeader('Content-Type')) return;
@@ -38,7 +37,7 @@ exports.setHeaders = function (res) {
 };
 exports.setStatusCode = function (res) {
   if (res.sstatus) res.status(res.sstatus);
-}
+};
 var etag = function (stat) {
   return '"' + stat.size + '-' + Number(stat.mtime) + '"';
 };

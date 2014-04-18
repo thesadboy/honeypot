@@ -1,19 +1,19 @@
-*{margin: 0; padding: 0; position: relative;}
-body{font-size: 14px; color: #333; font-family: '幼圆','微软雅黑'; padding: 20px; line-height: 1.2}
-.header{margin: 20px 0; font-size: 24px ;font-weight: bold;}
-.header .header-sub{font-size: 12px; color: #999; font-weight: normal; margin-left: 15px;}
-#case-list{margin: 10px 0;}
-.case-item{}
-.item-header{line-height: 40px; font-weight: bold; font-size: 16px; border-left: 2px solid #175391; background: #efefef; margin: 10px 0;}
-.item-header-title{float: left; margin: 0 20px;}
-.item-header-info{ color: #34789a;}
-.item-result-list{}
-.result-item{line-height: 30px;padding-left: 20px; background-repeat: no-repeat; background-position: 0 7px;}
-.result-success{background-image: url('../image/status-success.png');}
-.result-fail{background-image: url('../image/status-fail.png');}
-.result-warn{background-image: url('../image/status-warn.png');}
-.result-terminate{background-image: url('../image/status-terminate.png');}
-.result-wait{background-image: url('../image/wait.gif');}
-.legend{display: inline-block; width: 100%; line-height: 30px;}
-.legend .legend-title{float: left; font-weight: bold; margin-right: 10px;}
-.legend .legend-item{float: left; margin-right: 10px; padding-left: 20px; background-repeat: no-repeat; background-position: 0 7px;}
+* { margin: 0; padding: 0; position: relative; }
+body { font-size: 14px; color: #333; font-family: '幼圆', '微软雅黑', serif; padding: 20px; line-height: 1.2 }
+.header { margin: 20px 0; font-size: 24px; font-weight: bold; }
+.header .header-sub { font-size: 12px; color: #999; font-weight: normal; margin-left: 15px; }
+#case-list { margin: 10px 0; }
+.case-item { }
+.item-header { line-height: 40px; font-weight: bold; font-size: 16px; border-left: 2px solid #175391; background: #efefef; margin: 10px 0; }
+.item-header-title { float: left; margin: 0 20px; }
+.item-header-info { color: #34789a; }
+.item-result-list { }
+.result-item { line-height: 30px; padding-left: 20px; background-repeat: no-repeat; background-position: 0 7px; }
+.result-success { background-image: url('../image/status-success.png'); }
+.result-fail { background-image: url('../image/status-fail.png'); }
+.result-warn { background-image: url('../image/status-warn.png'); }
+.result-terminate { background-image: url('../image/status-terminate.png'); }
+.result-wait { background-image: url('../image/wait.gif'); }
+.legend { display: inline-block; width: 100%; line-height: 30px; }
+.legend .legend-title { float: left; font-weight: bold; margin-right: 10px; }
+.legend .legend-item { float: left; margin-right: 10px; padding-left: 20px; background-repeat: no-repeat; background-position: 0 7px; }
