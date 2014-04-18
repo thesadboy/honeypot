@@ -12,12 +12,12 @@ var clients = require('memory-cache');
 var cloneObject = require('./util').cloneObject;
 
 //初始化Handle
-exports.initHandle = function() {
-  return function(req, res, next) {
+exports.initHandle = function () {
+  return function (req, res, next) {
     //发送文件
-    res.nsendfile = function(path) {
+    res.nsendfile = function (path) {
       var self = this;
-      Timers.setTimeout(function() {
+      Timers.setTimeout(function () {
         //not found
         if (!Fs.existsSync(path)) {
           return next();
@@ -33,12 +33,12 @@ exports.initHandle = function() {
         if (self.slimit) {
           var throttle = new Throttle(self.slimit);
           fileStream.pipe(throttle).pipe(self);
-          throttle.on('end', function() {
+          throttle.on('end', function () {
             self.end();
           });
         } else {
           fileStream.pipe(self);
-          fileStream.on('end', function() {
+          fileStream.on('end', function () {
             self.end();
           });
         }
@@ -49,7 +49,7 @@ exports.initHandle = function() {
 };
 
 //Handle Send
-exports.handleSend = function(req, res, next) {
+exports.handleSend = function (req, res, next) {
   //记录日志
   logger.info('{uuid: %s, id: %s, uri: %s}', req.query.uuid, req.params.id, req.params[0]);
   var id;
@@ -68,7 +68,7 @@ exports.handleSend = function(req, res, next) {
     var client = clients.get(uuid);
     if (client) {
       var queue = client[id];
-      (function(req, res, queue) {
+      (function (req, res, queue) {
         var data = {
           time: new Date(),
           req: req,
@@ -85,8 +85,7 @@ exports.handleSend = function(req, res, next) {
   next();
 };
 
-
-var Handle = function(req, res, id, uuid) {
+var Handle = function (req, res, id, uuid) {
   this.req = req;
   this.res = res;
   this.id = id;
@@ -94,7 +93,7 @@ var Handle = function(req, res, id, uuid) {
   this.datas = {};
 };
 Handle.prototype = {
-  header: function(key, value) {
+  header: function (key, value) {
     if (key != null && value != null) {
       this.res.sheaders = this.res.sheaders || [];
       this.datas.headers = this.datas.headers || [];
@@ -103,7 +102,7 @@ Handle.prototype = {
     }
     return this;
   },
-  cookie: function(key, value) {
+  cookie: function (key, value) {
     if (key != null && value != null) {
       this.res.scookies = this.res.scookies || [];
       this.datas.cookies = this.datas.cookies || [];
@@ -112,42 +111,42 @@ Handle.prototype = {
     }
     return this;
   },
-  status: function(code) {
+  status: function (code) {
     if (isNaN(code)) throw new Error('status code must be a number');
     this.res.sstatus = code;
     this.datas.status = code;
     return this;
   },
-  delay: function(ms) {
+  delay: function (ms) {
     if (isNaN(ms) || ms < 0) throw new Error('delay must be a number equals 0 or greater than 0');
     this.res.sdelay = ms;
     this.datas.delay = ms;
     return this;
   },
-  limit: function(kb) {
+  limit: function (kb) {
     if (isNaN(kb) || kb < 1) throw new Error('limit must be a number greater tha 0');
     this.res.slimit = kb * 1024;
     this.datas.limit = kb * 1024;
     return this;
   },
-  send: function(type, data) {
+  send: function (type, data) {
     data.parent = '#' + this.id;
     data.id = '#' + type;
     socket.send(this.uuid, 'wait', data);
     return this;
   },
-  emit: function(type) {
+  emit: function (type) {
     var handle = new ResultHandle();
     handle.handleResult(this.uuid, this.id, type, this.req, this.res, this.datas);
     return this;
   }
 };
 
-var registHandle = function(id, uuid, uripath, req, res) {
+var registHandle = function (id, uuid, uripath, req, res) {
   var sendHandles = Strategy.getSendHandles(id);
   if (sendHandles) {
     var handle = new Handle(req, res, id, uuid);
-    sendHandles.forEach(function(sendHandle) {
+    sendHandles.forEach(function (sendHandle) {
       if (uripath.match(sendHandle[0])) {
         sendHandle[1](uripath, handle);
       }

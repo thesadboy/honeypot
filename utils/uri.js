@@ -1,7 +1,7 @@
 var Url = require('url');
 var Path = require('path');
 
-exports.getRequestType = function(req) {
+exports.getRequestType = function (req) {
   var url = req.url;
   var parsed = Url.parse(url);
   var pathname = parsed.pathname;
@@ -19,7 +19,7 @@ exports.getRequestType = function(req) {
   }
 };
 
-exports.getFilePath = function(type, req) {
+exports.getFilePath = function (type, req) {
   var id = req.params.id;
   var uripath = req.params[0];
   var path = '';
@@ -31,20 +31,20 @@ exports.getFilePath = function(type, req) {
   return path;
 }
 
-var getNameByUrl = exports.getNameByUrl = function(url) {
+var getNameByUrl = exports.getNameByUrl = function (url) {
   if (!url) return '';
   var pathnames = Url.parse(url).pathname.split('/');
   return pathnames[pathnames.length - 1];
 }
 
-exports.replaceM3U8Url = function(str, id, uuid) {
+exports.replaceM3U8Url = function (str, id, uuid) {
   var keyPos = -1;
-  str = str.replace(/(#EXT-X-STREAM-INF[^\n\r]+[\n\r])(^[^\n\r]+)/gim, function(matches, $1, $2) {
+  str = str.replace(/(#EXT-X-STREAM-INF[^\n\r]+[\n\r])(^[^\n\r]+)/gim, function (matches, $1, $2) {
     //STREAM
     var uri = '/case/' + id + '/' + getNameByUrl($2) + '?uuid=' + uuid;
     // console.log($2);
     return $1 + uri;
-  }).replace(/(#EXT-X-KEY[^\n\r]+URI=")([^\"\r\n]+)("[^\n\r]+)/gi, function(matches, $1, $2, $3) {
+  }).replace(/(#EXT-X-KEY[^\n\r]+URI=")([^\"\r\n]+)("[^\n\r]+)/gi, function (matches, $1, $2, $3) {
     //KEY
     keyPos++;
     var keyName = getNameByUrl($2);
@@ -53,7 +53,7 @@ exports.replaceM3U8Url = function(str, id, uuid) {
     }
     var uri = '/case/' + id + '/key/' + keyName + '?uuid=' + uuid;
     return $1 + uri + $3;
-  }).replace(/(#EXTINF\:[^\r\n]+[\r\n])([^\n\r]+)/gim, function(matches, $1, $2) {
+  }).replace(/(#EXTINF\:[^\r\n]+[\r\n])([^\n\r]+)/gim, function (matches, $1, $2) {
     //EXTINF
     var uri = '/case/' + id + '/ts/' + getNameByUrl($2) + '?uuid=' + uuid;
     return $1 + uri;

@@ -36,7 +36,7 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server, {
   log: false
 });
-server.listen(app.get('port'), function() {
+server.listen(app.get('port'), function () {
   console.log('Honeypot server listening on port %d', app.get('port'));
 });
 

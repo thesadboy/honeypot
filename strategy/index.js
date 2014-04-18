@@ -7,19 +7,19 @@ var resultHandles = {};
 var ids = [];
 var cases = [];
 
-exports.getSendHandles = function(id) {
+exports.getSendHandles = function (id) {
   return sendHandles[id];
 };
-exports.getResultHandles = function() {
+exports.getResultHandles = function () {
   return resultHandles;
 };
-exports.getTestIds = function() {
+exports.getTestIds = function () {
   return ids;
 };
-exports.getCases = function() {
+exports.getCases = function () {
   return cases;
 };
-exports.getCaseInfo = function(id) {
+exports.getCaseInfo = function (id) {
   for (var i = 0; i < cases.length; i++) {
     if (cases[i].id == id) {
       return cases[i];
@@ -28,8 +28,7 @@ exports.getCaseInfo = function(id) {
   return null;
 };
 
-
-var Strategy = exports.Strategy = function(id) {
+var Strategy = exports.Strategy = function (id) {
   ids.push(id);
   this.id = id;
   sendHandles[id] = [];
@@ -38,11 +37,11 @@ var Strategy = exports.Strategy = function(id) {
 
 Strategy.prototype = {
   constructor: Strategy,
-  registSendHandle: function(regExp, callback) {
+  registSendHandle: function (regExp, callback) {
     sendHandles[this.id].push([regExp, callback]);
     return this;
   },
-  registResultHandle: function(condition, callback) {
+  registResultHandle: function (condition, callback) {
     resultHandles[this.id].push([condition, callback]);
     resultHandle.registHandle(this.id, condition, callback);
     return this;
@@ -54,7 +53,7 @@ Strategy.prototype = {
  */
 (function requireStrategies() {
   var files = fs.readdirSync(__dirname);
-  files.forEach(function(file) {
+  files.forEach(function (file) {
     if (file != path.basename(__filename)) {
       cases.push(require(path.join(__dirname, file)));
     }

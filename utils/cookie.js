@@ -1,6 +1,6 @@
 var socket = require('./socket');
 
-exports.parse = function(str) {
+exports.parse = function (str) {
   if (!str) return {};
   var obj = {};
   str = str.split(';');
