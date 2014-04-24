@@ -17,17 +17,19 @@ strategyLive.registSendHandle(/index\.m3u8/, function (uri, handle) {
   }).cookie('cookietest', 'cookiesupport').send('live-free-cookie', { //播放器cookie支持
     msg: '播放器是否支持COOKIE'
   });
-}).registSendHandle(/_0\.ts/, function (uri, handle) {
+}).registSendHandle(/_[0-9]\.ts/, function (uri, handle) {
   handle.send('live-free-ts-pre', { //播放器是否预读TS
     msg: '播放器是否预读TS'
-  });
-}).registSendHandle(/_[5-9]\.ts/, function (uri, handle) {
-  handle.limit(500).send('live-free-speed-change', { //播放器码率切换
+  }).send('live-free-speed-change', { //播放器码率切换
     msg: '播放器是否支持自动切换码率'
-  });
-}).registSendHandle(/_(1[0-9])\.ts/, function (uri, handle) {
-  handle.limit(180);
-}).registSendHandle(/_(2[0-7])\.ts/, function (uri, handle) {
+  }).limit(340); // 1053000
+}).registSendHandle(/_1[0-4]\.ts/, function (uri, handle) {
+  handle.limit(80); // 559000
+}).registSendHandle(/_1[5-9]\.ts/, function (uri, handle) {
+  handle.limit(340); // 2526000
+}).registSendHandle(/_20\.ts/, function (uri, handle) {
+  handle.limit(60);
+}).registSendHandle(/_2[1-5]\.ts/, function(uri, handle){
   handle.limit(80);
 }).registSendHandle(/_30\.ts/, function (uri, handle) {
   handle.send('live-free-discontinuity', {//播放器是否支持DISCONTINUITY标签
@@ -78,7 +80,7 @@ strategyLive.registResultHandle({
   console.log('TIMEOUT');
 }).registResultHandle({
   type: 'URI',
-  value: /_27\.ts/
+  value: /_26\.ts/
 }, function (list, handle) {
   //播放器码率变换支持
   var count1053000 = 0;
